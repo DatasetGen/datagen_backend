@@ -20,3 +20,4 @@ build/
 
 media/
 .env/
+.idea/
