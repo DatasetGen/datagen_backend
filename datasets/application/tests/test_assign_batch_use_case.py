@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
-from datasets.application.AssignBatchUseCase import AssignBatchUseCase, AssignBatchCommand
+from datasets.application.assign_batch_use_case import AssignBatchUseCase, AssignBatchCommand
 from datasets.domain import Dataset, Job, DatasetImage, DataBatch
 
 class DatasetBatchJobImageTest(TestCase):

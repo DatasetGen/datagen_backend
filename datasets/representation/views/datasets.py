@@ -5,6 +5,8 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+from datasets.application.annotations_by_label_bar_chart_query import SyntheticVsRealAnnotationsBarChartQuery
+from datasets.application.synthetic_vs_real_annotations_pie_chart_query import SyntheticVsRealAnnotationsPieChartQuery
 from datasets.models import Dataset, Label, DatasetImage, Annotation
 from datasets.representation.serializers.datasets.annotations import AnnotationDetailedSerializer, AnnotationSerializer
 from datasets.representation.serializers.datasets.dataset import DatasetSerializer
@@ -23,6 +25,19 @@ class DatasetViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         user = self.request.user
         serializer.save(user=user)
+
+    @action(detail=True, methods=['get'])
+    def pie_chart(self, request, pk=None):
+        use_case = SyntheticVsRealAnnotationsPieChartQuery()
+        res = use_case.query(dataset_id=pk)
+        return Response(res, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['get'])
+    def bar_chart(self, request, pk=None):
+        use_case = SyntheticVsRealAnnotationsBarChartQuery()
+        res = use_case.query(dataset_id=pk)
+        return Response(res, status=status.HTTP_200_OK)
+
 
 class LabelViewSet(viewsets.ModelViewSet):
     queryset = Label.objects.all().order_by('-id')

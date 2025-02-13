@@ -7,7 +7,7 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from datasets.application.AssignBatchUseCase import AssignBatchUseCase, AssignBatchCommand
+from datasets.application.assign_batch_use_case import AssignBatchUseCase, AssignBatchCommand
 from datasets.models import Job, DataBatch
 from datasets.representation.serializers.annotations import JobSerializer, JobPostSerializer, BatchSerializer
 
