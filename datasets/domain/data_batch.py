@@ -7,6 +7,7 @@ class DataBatch(Entity):
     name = models.CharField(max_length=100)
     dataset = models.ForeignKey('datasets.Dataset', on_delete=models.CASCADE, related_name='job_categories')
     timestamp = models.DateTimeField(auto_now_add=True)
+    workbench = models.BooleanField(default=True)
 
     @property
     def unassigned_images(self):

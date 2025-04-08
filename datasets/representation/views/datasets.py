@@ -27,6 +27,18 @@ class DatasetViewSet(viewsets.ModelViewSet):
         serializer.save(user=user)
 
     @action(detail=True, methods=['get'])
+    def image_bar_chart(self, request, pk=None):
+        use_case = SyntheticVsRealAnnotationsPieChartQuery()
+        res = use_case.query(dataset_id=pk)
+        return Response(res, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['get'])
+    def image_pie_chart(self, request, pk=None):
+        use_case = SyntheticVsRealAnnotationsPieChartQuery()
+        res = use_case.query(dataset_id=pk)
+        return Response(res, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['get'])
     def pie_chart(self, request, pk=None):
         use_case = SyntheticVsRealAnnotationsPieChartQuery()
         res = use_case.query(dataset_id=pk)
@@ -122,6 +134,7 @@ class AnnotationViewSet(viewsets.ModelViewSet):
                     label=label,
                     image=image,
                     data=annotation_data["data"],
+                    is_synthetic=annotation_data.get("is_synthetic") or False
                 )
 
                 created_annotations.append(annotation)

@@ -7,6 +7,7 @@ from rest_framework import serializers
 class BatchSerializer(serializers.ModelSerializer):
     total = serializers.SerializerMethodField()
     unassigned = serializers.SerializerMethodField()
+    synthetic = serializers.SerializerMethodField()
     completed = serializers.SerializerMethodField()
 
     class Meta:
@@ -20,6 +21,10 @@ class BatchSerializer(serializers.ModelSerializer):
     def get_unassigned(self, obj):
         """Returns the number of completed jobs (where done=True) in this category."""
         return obj.images.filter(job=None).count()
+
+    def get_synthetic(self, obj):
+        """Returns the number of completed jobs (where done=True) in this category."""
+        return obj.images.filter(job=None, is_synthetic=True).count()
 
     def get_completed(self, obj):
         """Returns the number of completed jobs (where done=True) in this category."""

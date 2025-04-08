@@ -55,10 +55,10 @@ class BatchFilter(FilterSet):
 
     class Meta:
         model = DataBatch
-        fields = ['unassigned', 'unassigned_gt']  # Enables filtering by unassigned count
+        fields = ['unassigned', 'unassigned_gt', 'workbench']  # Enables filtering by unassigned count
 
 class BatchViewSet(viewsets.ModelViewSet):
-    queryset = DataBatch.objects.all().order_by('id')
+    queryset = DataBatch.objects.all().order_by('-id')
     serializer_class = BatchSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
