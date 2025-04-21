@@ -1,9 +1,12 @@
 import math
 from dataclasses import dataclass
 from typing import List
+<<<<<<< HEAD
 
 from django.db import transaction
 
+=======
+>>>>>>> db92b9544d6455a511459022abcac9a0582f362e
 from datasets.domain import DataBatch, DatasetImage, Job
 from users.models import CustomUser
 

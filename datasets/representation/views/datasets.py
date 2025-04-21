@@ -6,8 +6,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from datasets.application.annotations_by_label_bar_chart_query import SyntheticVsRealAnnotationsBarChartQuery
+<<<<<<< HEAD
 from datasets.application.download_dataset_for_detection_use_case import DownloadDatasetForDetectionUseCase, \
     DownloadDatasetForDetectionCommand
+=======
+>>>>>>> db92b9544d6455a511459022abcac9a0582f362e
 from datasets.application.synthetic_vs_real_annotations_pie_chart_query import SyntheticVsRealAnnotationsPieChartQuery
 from datasets.models import Dataset, Label, DatasetImage, Annotation
 from datasets.representation.serializers.datasets.annotations import AnnotationDetailedSerializer, AnnotationSerializer
