@@ -38,7 +38,7 @@ class DownloadDatasetForDetectionUseCase:
                 annotation_text = ""
                 for annotation in annotations:
                     index = labels.index(annotation.label.id)
-                    annotation_text += "{} {} {} {} {}\n".format(index, annotation.data["point"][0], annotation.data["point"][1], annotation.data["width"], annotation.data["height"])
+                    annotation_text += "{} {} {} {} {}\n".format(index, annotation.data["point"][0]+annotation.data["width"]/2, annotation.data["point"][1]+annotation.data["height"]/2, annotation.data["width"], annotation.data["height"])
                 zip.writestr( "train/labels/{}.txt".format(img_name), annotation_text)
             zip.close()
         return Result.ok({
