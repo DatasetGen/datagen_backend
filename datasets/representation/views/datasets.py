@@ -6,15 +6,13 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from datasets.application.annotations_by_label_bar_chart_query import SyntheticVsRealAnnotationsBarChartQuery
-<<<<<<< HEAD
+from datasets.domain import DatasetSnapshot
 from datasets.application.download_dataset_for_detection_use_case import DownloadDatasetForDetectionUseCase, \
     DownloadDatasetForDetectionCommand
-=======
->>>>>>> db92b9544d6455a511459022abcac9a0582f362e
 from datasets.application.synthetic_vs_real_annotations_pie_chart_query import SyntheticVsRealAnnotationsPieChartQuery
 from datasets.models import Dataset, Label, DatasetImage, Annotation
 from datasets.representation.serializers.datasets.annotations import AnnotationDetailedSerializer, AnnotationSerializer
-from datasets.representation.serializers.datasets.dataset import DatasetSerializer
+from datasets.representation.serializers.datasets.dataset import DatasetSerializer, DatasetSnapshotSerializer
 from datasets.representation.serializers.datasets.dataset_images import DatasetImageSerializer
 from datasets.representation.serializers.datasets.labels import LabelSerializer
 
@@ -81,6 +79,17 @@ class DatasetImageFilter(FilterSet):
     class Meta:
         model = DatasetImage
         exclude = ['image']  # Exclude the ImageField from filtering
+
+
+class DatasetSnapshotViewSet(viewsets.ModelViewSet):
+    queryset= DatasetSnapshot.objects.all().order_by("-id")
+    serializer_class= DatasetSnapshotSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [DjangoFilterBackend,]
+
+    def get_queryset(self):
+        dataset_id = self.kwargs.get('dataset_pk')
+        return super().get_queryset().filter(dataset_id=dataset_id, dataset__user=self.request.user)
 
 class DatasetImageViewSet(viewsets.ModelViewSet):
     queryset = DatasetImage.objects.all().order_by('-id')

@@ -3,6 +3,7 @@ from rest_framework import serializers
 from datasets.models import Dataset
 from datasets.representation.serializers.datasets.dataset_images import DatasetImageSerializer
 from datasets.representation.serializers.datasets.labels import LabelSerializer
+from datasets.models import DatasetSnapshot
 
 
 class DatasetSerializer(serializers.ModelSerializer):
@@ -40,3 +41,9 @@ class DatasetSerializer(serializers.ModelSerializer):
                 "image": request.build_absolute_uri(image_url)
             }
         return None
+
+class DatasetSnapshotSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DatasetSnapshot
+        fields = '__all__'
+

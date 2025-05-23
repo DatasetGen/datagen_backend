@@ -41,6 +41,8 @@ class DownloadDatasetForDetectionUseCase:
                     annotation_text += "{} {} {} {} {}\n".format(index, annotation.data["point"][0]+annotation.data["width"]/2, annotation.data["point"][1]+annotation.data["height"]/2, annotation.data["width"], annotation.data["height"])
                 zip.writestr( "train/labels/{}.txt".format(img_name), annotation_text)
             zip.close()
+        snapshot.file = 'snapshots/dataset_{}__snapshot_{}.zip'.format(dataset.id, snapshot.id)
+        snapshot.save()
         return Result.ok({
             "dataset_id": dataset.id,
             "snapshot_id": snapshot.id,
