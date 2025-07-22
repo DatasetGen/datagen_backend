@@ -10,7 +10,15 @@ from datasets.representation.serializers.datasets.labels import LabelSerializer
 
 class DatasetImageSerializer(serializers.ModelSerializer):
     image = Base64ImageField(required=True)  # Use the custom Base64ImageField for POST
-    base_image = Base64ImageField(required=False)  # Use the custom Base64ImageField for POST
+    base_image = serializers.PrimaryKeyRelatedField(
+        queryset=DatasetImage.objects.all(),
+        required=False,
+        allow_null=True
+    )
+    derivatives = serializers.PrimaryKeyRelatedField(
+        many=True,
+        read_only=True
+    )
     total_weight = serializers.SerializerMethodField()
     extension = serializers.SerializerMethodField()
     name = serializers.SerializerMethodField()
