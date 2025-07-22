@@ -12,6 +12,10 @@ class DatasetImage(Entity):
 
     dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=upload_to)
+    base_image = models.ImageField(upload_to=upload_to, null=True, blank=True)
+    prompt = models.TextField(default="")
+    negative_prompt = models.TextField(default="")
+    generation_type = models.CharField(max_length=100, default="text2image")
     is_synthetic = models.BooleanField(default=False)
     job = models.ForeignKey('datasets.Job', on_delete=models.SET_NULL, related_name='images', null=True, blank=True)
     batch = models.ForeignKey('datasets.DataBatch', on_delete=models.CASCADE, related_name='images', null=True, blank=True)

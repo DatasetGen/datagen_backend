@@ -78,7 +78,7 @@ class LabelViewSet(viewsets.ModelViewSet):
 class DatasetImageFilter(FilterSet):
     class Meta:
         model = DatasetImage
-        exclude = ['image']  # Exclude the ImageField from filtering
+        exclude = ['image', 'base_image']  # Exclude the ImageField from filtering
 
 
 class DatasetSnapshotViewSet(viewsets.ModelViewSet):
