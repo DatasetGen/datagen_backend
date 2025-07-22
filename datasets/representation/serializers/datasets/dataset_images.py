@@ -15,6 +15,9 @@ class DatasetImageSerializer(serializers.ModelSerializer):
     extension = serializers.SerializerMethodField()
     name = serializers.SerializerMethodField()
     labels = serializers.SerializerMethodField()
+    prompt = serializers.CharField(required=False)
+    negative_prompt = serializers.CharField(required=False)
+    extra_information = serializers.JSONField(required=False)
     annotations = AnnotationDetailedSerializer(many=True, read_only=True)
 
     class Meta:

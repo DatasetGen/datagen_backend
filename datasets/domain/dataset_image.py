@@ -13,6 +13,7 @@ class DatasetImage(Entity):
     dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=upload_to)
     base_image = models.ImageField(upload_to=upload_to, null=True, blank=True)
+    extra_information = models.JSONField(default=dict)
     prompt = models.TextField(default="")
     negative_prompt = models.TextField(default="")
     generation_type = models.CharField(max_length=100, default="text2image")
