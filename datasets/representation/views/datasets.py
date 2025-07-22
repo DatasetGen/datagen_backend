@@ -1,5 +1,6 @@
 from django.db import transaction
-from django_filters import FilterSet
+from django.forms import JSONField
+from django_filters import FilterSet, CharFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
