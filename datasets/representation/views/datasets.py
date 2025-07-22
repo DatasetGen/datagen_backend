@@ -79,6 +79,12 @@ class LabelViewSet(viewsets.ModelViewSet):
 class DatasetImageFilter(FilterSet):
     class Meta:
         model = DatasetImage
+        filter_overrides = {
+            JSONField: {
+                'filter_class': CharFilter,
+                'extra': lambda f: {'lookup_expr': 'icontains'},
+            },
+        }
         exclude = ['image', 'base_image', 'extra_information']  # Exclude the ImageField from filtering
 
 
